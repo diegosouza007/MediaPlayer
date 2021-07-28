@@ -5,52 +5,90 @@
 }
 
 :root {
-    --black: #000000;
-    --dark-grey: #1e1e1e;
+    --black: #1c2034;
+    --dark-blue: #262c46;
+    --darker-blue: #1b2139;
+    --light-grey: #ADADAD;
     --white: #FFFFFF;
     font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
 }
 
 .background {
     position: relative;
-    background-color: var(--black);
+    background-image: linear-gradient(to bottom right, var(--dark-blue), var(--black));
     height: 100vh;
     width: 100vw;
     padding-top: 5rem;
 }
 
 .display {
-    border-top: 1px solid var(--white);
-    border-left: 1px solid var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     width: min(60rem, 80%);
-    height: calc(100% - 20rem);
+    height: calc(100% - 31.2rem);
     margin: auto;
-    border-radius: 1.5rem;
 }
 
-.display .display__wrapper {
-    width: 100%;
-    height: 100%;
-    border-radius: 1.5rem;
-    background-image: url("../img/music-arts/ceu-azul.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+.display img {
+    display: inline-block;
+    text-align: center;
+    height: 19rem;
+    width: 19rem;
+    margin: 2rem;
 }
 
-.display .display__wrapper .display__glass {
-    background-color: rgba(255, 255, 255, .25);
-    width: 100%;
-    backdrop-filter: blur(.5rem);
-    height: 100%;
-    border-radius: 1.5rem;
-    gradient
+.display p,
+span {
+    color: var(--white);
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+.playlist {
+    border-left: .2rem solid var(--darker-blue);
+    border-right: .2rem solid var(--darker-blue);
+    border-radius: 1.5rem 0;
+    width: min(85rem, 95%);
+    margin: auto;
+}
+
+.playlist li {
+    display: flex;
+    justify-content: space-between;
+    color: var(--light-grey);
+    list-style: none;
+    padding: 2rem 3.5rem;
+    font-size: 1.7rem;
+}
+
+.playlist li:hover {
+    background-color: var(--dark-blue);
+    border-radius: 1.5rem 0;
 }
 
 .controls {
-    position: absolute;
-    background-color: var(--dark-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: var(--dark-blue);
     width: 100%;
     height: 12rem;
     bottom: 0;
+}
+
+.controls .controls_wrappper {
+    display: flex;
+}
+
+.controls .controls_wrappper img {
+    margin-left: 1rem;
+    width: 5rem;
+}
+
+.controls .controls_wrappper img:nth-child(3) {
+    width: 7rem;
 }
