@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --black: #000000;
+    --dark-grey: #1e1e1e;
+    --white: #FFFFFF;
+    font-size: 62.5%;
+}
+
+.background {
+    position: relative;
+    background-color: var(--black);
+    height: 100vh;
+    width: 100vw;
+    padding-top: 5rem;
+}
+
+.display {
+    border-top: 1px solid var(--white);
+    border-left: 1px solid var(--white);
+    width: min(60rem, 80%);
+    height: calc(100% - 20rem);
+    margin: auto;
+    border-radius: 1.5rem;
+}
+
+.display .display__wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+    background-image: url("../img/music-arts/ceu-azul.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.display .display__wrapper .display__glass {
+    background-color: rgba(255, 255, 255, .25);
+    width: 100%;
+    backdrop-filter: blur(.5rem);
+    height: 100%;
+    border-radius: 1.5rem;
+    gradient
+}
+
+.controls {
+    position: absolute;
+    background-color: var(--dark-grey);
+    width: 100%;
+    height: 12rem;
+    bottom: 0;
+}
