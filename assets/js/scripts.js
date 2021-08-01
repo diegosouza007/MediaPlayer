@@ -14,6 +14,9 @@ const play = document.getElementById('play');
 
 play.addEventListener('click', playMusic);
 repeat.addEventListener('click', activeLoopMusic);
+fastForward.addEventListener('click', fastForwardMusic);
+rewind.addEventListener('click', rewindMusic);
+volume.addEventListener('click', changeVolume);
 
 // Player status (paused or playing)
 
@@ -23,7 +26,11 @@ let isMusicPlaying = false;
 
 let isRepeatEnable = false;
 
-// ======= Player functions =======
+// Volume default value
+
+let volumeRate = 1.0;
+
+// ========== Player functions ========== //
 
 // Play/Pause the music
 
@@ -46,6 +53,44 @@ function playMusic() {
 
     isMusicPlaying = !isMusicPlaying;
 
+}
+
+// Accelerate music speed rate
+
+function fastForwardMusic() {
+    music.playbackRate += 0.25;
+}
+
+// Decrease music speed rate
+function rewindMusic() {
+    music.playbackRate -= 0.25;
+}
+
+// Change the volume of the music
+
+function changeVolume() {
+    switch (volumeRate) {
+        case 1.0:
+            volumeRate = 0.7;
+            music.volume = volumeRate;
+            volume.setAttribute('src', './assets/img/buttons/volume-1.svg');
+            break;
+        case 0.7:
+            volumeRate = 0.4;
+            music.volume = volumeRate;
+            volume.setAttribute('src', './assets/img/buttons/volume.svg');
+            break;
+        case 0.4:
+            volumeRate = 0;
+            music.volume = volumeRate;
+            volume.setAttribute('src', './assets/img/buttons/volume-x.svg');
+            break;
+        default:
+            volumeRate = 1.0;
+            music.volume = volumeRate;
+            volume.setAttribute('src', './assets/img/buttons/volume-2.svg');
+            break;
+    }
 }
 
 // Update the current time progress
