@@ -12,11 +12,52 @@ const play = document.getElementById('play');
 
 // Adding event listenners for the actions buttons
 
-play.addEventListener('click', playMusic);
-repeat.addEventListener('click', activeLoopMusic);
 fastForward.addEventListener('click', fastForwardMusic);
-rewind.addEventListener('click', rewindMusic);
+repeat.addEventListener('click', activeLoopMusic);
 volume.addEventListener('click', changeVolume);
+rewind.addEventListener('click', rewindMusic);
+play.addEventListener('click', playMusic);
+
+// Array with the songs playlist
+
+const playlist = [{
+        name: "Superhero",
+        band: "Unknown Brain (feat. Chris Linton)",
+        released: "2016",
+        file: "./assets/songs/Unknown-Brain-Superhero-_feat.-Chris-Linton_-_NCS-Release_.ogg",
+        image: "./assets/img/thumbnails/unkown-brain-super-hero.webp"
+    },
+    {
+        name: "On & On (feat. Daniel Levi) [NCS Release]",
+        band: "Cartoon",
+        released: "2015",
+        file: "./assets/songs/Cartoon-On-On-feat-Daniel-Levi-NCS-Release.ogg",
+        image: "./assets/img/thumbnails/cartoon-on-on.webp"
+    },
+    {
+        name: "We Are [NCS Release]",
+        band: "Jo Cohen & Sex Whales",
+        released: "2016",
+        file: "./assets/songs/Jo-Cohen-Sex-Whales-We-Are-NCS-Release.ogg",
+        image: "./assets/img/thumbnails/We-Are-Jo-Cohen.webp"
+    },
+    {
+        name: "Cradles [NCS Release]",
+        band: "Sub Urban",
+        released: "2019",
+        file: "./assets/songs/Sub-Urban-Cradles-NCS-Release.ogg",
+        image: "./assets/img/thumbnails/Sub-Urban-Cradles.webp"
+    },
+    {
+        name: "Heroes Tonight [NCS Release]",
+        band: "Janji feat Johnning",
+        released: "2015",
+        file: "./assets/songs/Janji-Heroes-Tonight-feat-Johnning-NCS-Release.ogg",
+        image: "./assets/img/thumbnails/janji-heroes.webp"
+    }
+]
+
+// ========== Global variables ========== //
 
 // Player status (paused or playing)
 
@@ -26,9 +67,13 @@ let isMusicPlaying = false;
 
 let isRepeatEnable = false;
 
-// Volume default value
+// Default volume value
 
 let volumeRate = 1.0;
+
+// Playlist track index to control musics play order
+
+let track = 0;
 
 // ========== Player functions ========== //
 
@@ -42,7 +87,6 @@ function playMusic() {
     } else {
         play.setAttribute('src', './assets/img/buttons/play-circle.svg');
         play.setAttribute('title', 'Reproduzir');
-
     }
 
     if (!isMusicPlaying) {
@@ -52,7 +96,6 @@ function playMusic() {
     }
 
     isMusicPlaying = !isMusicPlaying;
-
 }
 
 // Accelerate music speed rate
@@ -98,11 +141,32 @@ function changeVolume() {
 music.addEventListener("timeupdate", function() {
 
     let duration = (music.duration / 60).toFixed(2).replace('.', ':');
-    let timer = music.currentTime;
+    let timer = musicProgressTimer();
 
-    progress.innerHTML = `00:00 / ${duration}`;
+    progress.innerHTML = `${timer} / ${duration}`;
 });
 
+function musicProgressTimer() {
+
+    let progress = Math.round(music.currentTime);
+    let currentProgress = "";
+
+    //...
+
+    return progress;
+}
+
+// Salt to the next music
+
+function nextMusic() {
+    // ...
+}
+
+// Return to the previously music
+
+function previousMusic() {
+    // ...
+}
 
 // Enable/Disable loop music
 
