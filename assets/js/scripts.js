@@ -2,18 +2,24 @@
 
 const skipForward = document.getElementById('skip-forward');
 const fastForward = document.getElementById('fast-forward');
+const thumbnail = document.getElementById('thumbnail');
 const skipBack = document.getElementById('skip-back');
 const progress = document.getElementById('progress');
+const released = document.getElementById('released');
 const repeat = document.getElementById('repeat');
 const rewind = document.getElementById('rewind');
 const volume = document.getElementById('volume');
+const singer = document.getElementById('singer');
 const music = document.getElementById('music');
 const play = document.getElementById('play');
+const band = document.getElementById('band');
 
 // Adding event listenners for the actions buttons
 
 fastForward.addEventListener('click', fastForwardMusic);
 repeat.addEventListener('click', activeLoopMusic);
+skipBack.addEventListener('click', previousMusic);
+skipForward.addEventListener('click', nextMusic);
 volume.addEventListener('click', changeVolume);
 rewind.addEventListener('click', rewindMusic);
 play.addEventListener('click', playMusic);
@@ -21,35 +27,35 @@ play.addEventListener('click', playMusic);
 // Array with the songs playlist
 
 const playlist = [{
-        name: "Superhero",
+        singer: "Superhero",
         band: "Unknown Brain (feat. Chris Linton)",
         released: "2016",
         file: "./assets/songs/Unknown-Brain-Superhero-_feat.-Chris-Linton_-_NCS-Release_.ogg",
         image: "./assets/img/thumbnails/unkown-brain-super-hero.webp"
     },
     {
-        name: "On & On (feat. Daniel Levi) [NCS Release]",
+        singer: "On & On (feat. Daniel Levi) [NCS Release]",
         band: "Cartoon",
         released: "2015",
         file: "./assets/songs/Cartoon-On-On-feat-Daniel-Levi-NCS-Release.ogg",
         image: "./assets/img/thumbnails/cartoon-on-on.webp"
     },
     {
-        name: "We Are [NCS Release]",
+        singer: "We Are [NCS Release]",
         band: "Jo Cohen & Sex Whales",
         released: "2016",
         file: "./assets/songs/Jo-Cohen-Sex-Whales-We-Are-NCS-Release.ogg",
         image: "./assets/img/thumbnails/We-Are-Jo-Cohen.webp"
     },
     {
-        name: "Cradles [NCS Release]",
+        singer: "Cradles [NCS Release]",
         band: "Sub Urban",
         released: "2019",
         file: "./assets/songs/Sub-Urban-Cradles-NCS-Release.ogg",
         image: "./assets/img/thumbnails/Sub-Urban-Cradles.webp"
     },
     {
-        name: "Heroes Tonight [NCS Release]",
+        singer: "Heroes Tonight [NCS Release]",
         band: "Janji feat Johnning",
         released: "2015",
         file: "./assets/songs/Janji-Heroes-Tonight-feat-Johnning-NCS-Release.ogg",
@@ -57,7 +63,7 @@ const playlist = [{
     }
 ]
 
-// ========== Global variables ========== //
+// ========== Global control variables ========== //
 
 // Player status (paused or playing)
 
@@ -104,7 +110,8 @@ function fastForwardMusic() {
     music.playbackRate += 0.25;
 }
 
-// Decrease music speed rate
+// NEED CORRECTION: CHANGE RATE SPEED FOR REWIND FUNCTION
+
 function rewindMusic() {
     music.playbackRate -= 0.25;
 }
@@ -140,7 +147,7 @@ function changeVolume() {
 
 music.addEventListener("timeupdate", function() {
 
-    let duration = (music.duration / 60).toFixed(2).replace('.', ':');
+    let duration = "0" + (music.duration / 60).toFixed(2).replace('.', ':');
     let timer = musicProgressTimer();
 
     progress.innerHTML = `${timer} / ${duration}`;
@@ -148,10 +155,25 @@ music.addEventListener("timeupdate", function() {
 
 function musicProgressTimer() {
 
-    let progress = Math.round(music.currentTime);
-    let currentProgress = "";
+    let minutes = 0;
+    let seconds = Math.round(music.currentTime);
+    let progress = 0;
 
-    //...
+    if (seconds < 60) {
+        if (seconds < 10) {
+            progress = "00:" + "0" + seconds;
+        } else {
+            progress = "00:" + seconds;
+        }
+    } else {
+        minutes = Math.floor(Math.ceil(music.currentTime) / 60);
+        seconds = Math.ceil(music.currentTime) % 60;
+
+        minutes < 10 ? minutes = "0" + minutes : minutes;
+        seconds < 10 ? seconds = "0" + seconds : seconds;
+
+        progress = `${minutes}:${seconds}`;
+    }
 
     return progress;
 }
@@ -159,7 +181,19 @@ function musicProgressTimer() {
 // Salt to the next music
 
 function nextMusic() {
-    // ...
+
+    track++;
+
+    if (track >= playlist.length) {
+        location.reload();
+    }
+
+    singer.innerHTML = playlist[track].singer;
+    band.innerHTML = playlist[track].band;
+    released.innerHTML = playlist[track].released;
+    music.setAttribute('src', playlist[track].file);
+
+    music.play();
 }
 
 // Return to the previously music
