@@ -24,13 +24,36 @@ volume.addEventListener('click', changeVolume);
 rewind.addEventListener('click', rewindMusic);
 play.addEventListener('click', playMusic);
 
-// Update the current time progress
 
-music.addEventListener("timeupdate", function() {
-    let duration = "0" + (music.duration / 60).toFixed(2).replace('.', ':');
-    let timer = musicProgressTimer();
-    progress.innerHTML = `${timer} / ${duration}`;
-});
+// ========== Global control variables ========== //
+
+// Music status (paused or playing)
+
+let isMusicPlaying = music.ended;
+
+// Repeat button status
+
+let isRepeatEnable = false;
+
+// Default volume value
+
+let volumeRate = 1.0;
+
+// Playlist track index to control musics play order
+
+let track = 0;
+
+// Play button image location
+
+let playIconImage = './assets/img/buttons/play-circle.svg';
+
+// Pause button image location
+
+let pauseIconImage = './assets/img/buttons/pause-circle.svg';
+
+// Get actual image source from play/pause button
+
+let playButton = play.getAttribute('src');
 
 // Array with the songs playlist
 
@@ -71,46 +94,29 @@ const playlist = [{
     }
 ]
 
-// ========== Global control variables ========== //
-
-// Player status (paused or playing)
-
-let isMusicPlaying = music.ended;
-
-// Repeat button status
-
-let isRepeatEnable = false;
-
-// Default volume value
-
-let volumeRate = 1.0;
-
-// Playlist track index to control musics play order
-
-let track = 0;
-
-// Play button image location
-
-let playIconImage = './assets/img/buttons/play-circle.svg';
-
-// Pause button image location
-
-let pauseIconImage = './assets/img/buttons/pause-circle.svg';
-
-// Get actual image source from play/pause button
-
-let playButton = play.getAttribute('src');
-
 // ========== Player functions ========== //
+
+// Update the current time progress
+
+music.addEventListener("timeupdate", function() {
+
+    let duration = "0" + (music.duration / 60).toFixed(2).replace('.', ':');
+    let timer = musicProgressTimer();
+    progress.innerHTML = `${timer} / ${duration}`;
+
+    if (music.ended) {
+        nextMusic();
+    }
+});
 
 // Play/Pause the music
 
 function playMusic() {
 
     if (playButton === pauseIconImage) {
-        playButton = playIconImage;
+        play.src = playIconImage;
     } else {
-        playButton = pauseIconImage;
+        play.src = pauseIconImage;
     }
 
     if (isMusicPlaying) {
