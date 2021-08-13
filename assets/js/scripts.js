@@ -99,15 +99,15 @@ const playlist = [{
 // Update the current time progress
 
 music.addEventListener("timeupdate", function() {
+    let totalDuration = convertTimerMusic(music.duration);
+    let progressTimer = convertTimerMusic(music.currentTime);
 
-    let duration = "0" + (music.duration / 60).toFixed(2).replace('.', ':');
-    let timer = musicProgressTimer();
-    progress.innerHTML = `${timer} / ${duration}`;
-
-    if (music.ended) {
-        nextMusic();
-    }
+    progress.innerHTML = `${progressTimer} / ${totalDuration}`;
 });
+
+// Change to the next music after ends actual music in progress
+
+music.addEventListener("ended", () => nextMusic());
 
 // Play/Pause the music
 
@@ -169,31 +169,6 @@ function changeVolume() {
     }
 }
 
-function musicProgressTimer() {
-
-    let minutes = 0;
-    let seconds = Math.round(music.currentTime);
-    let progress = 0;
-
-    if (seconds < 60) {
-        if (seconds < 10) {
-            progress = "00:" + "0" + seconds;
-        } else {
-            progress = "00:" + seconds;
-        }
-    } else {
-        minutes = parseInt(music.currentTime / 60) % 60;
-        seconds = parseInt(music.currentTime % 60);
-
-        minutes < 10 ? minutes = "0" + minutes : minutes;
-        seconds < 10 ? seconds = "0" + seconds : seconds;
-
-        progress = `${minutes}:${seconds}`;
-    }
-
-    return progress;
-}
-
 // Salt to the next music
 
 function nextMusic() {
@@ -243,10 +218,19 @@ function activeLoopMusic() {
     if (!isRepeatEnable) {
         music.loop = true;
         repeat.setAttribute('src', './assets/img/buttons/repeat-active.svg');
+        repeat.setAttribute('title', 'Repetição ativada');
     } else {
         music.loop = false;
         repeat.setAttribute('src', './assets/img/buttons/repeat.svg');
+        repeat.setAttribute('title', 'Ativar repetição');
     }
 
     isRepeatEnable = !isRepeatEnable;
+}
+
+function convertTimerMusic(time) {
+    let minutes = Math.floor(time / 60);
+    let seconds = Math.floor(time % 60);
+
+    return `${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`;
 }
