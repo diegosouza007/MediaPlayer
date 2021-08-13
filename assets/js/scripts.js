@@ -1,7 +1,11 @@
 // Getting DOM references from the index page
 
+const openPlaylistBtn = document.getElementById('open__modal');
+const playlistModal = document.querySelector('.playlist__modal');
+const closeModalBtn = document.querySelector('.close__modal');
 const skipForward = document.getElementById('skip-forward');
 const fastForward = document.getElementById('fast-forward');
+const playlistLi = document.querySelector('.playlist');
 const thumbnail = document.getElementById('thumbnail');
 const skipBack = document.getElementById('skip-back');
 const progress = document.getElementById('progress');
@@ -9,14 +13,16 @@ const released = document.getElementById('released');
 const repeat = document.getElementById('repeat');
 const rewind = document.getElementById('rewind');
 const volume = document.getElementById('volume');
+const musicName = document.getElementById('musicName');
 const singer = document.getElementById('singer');
 const music = document.getElementById('music');
 const play = document.getElementById('play');
-const band = document.getElementById('band');
 
 // Adding event listenners for the actions buttons
 
 fastForward.addEventListener('click', fastForwardMusic);
+openPlaylistBtn.addEventListener('click', toggleModal);
+closeModalBtn.addEventListener('click', toggleModal);
 repeat.addEventListener('click', activeLoopMusic);
 skipBack.addEventListener('click', previousMusic);
 skipForward.addEventListener('click', nextMusic);
@@ -58,41 +64,48 @@ let playButton = play.getAttribute('src');
 // Array with the songs playlist
 
 const playlist = [{
-        singer: "Superhero",
-        band: "Unknown Brain (feat. Chris Linton)",
+        name: "Superhero",
+        singer: "Unknown Brain (feat. Chris Linton)",
         released: "2016",
+        duration: "03:02",
         file: "./assets/songs/Unknown-Brain-Superhero-_feat.-Chris-Linton_-_NCS-Release_.ogg",
         cover: "./assets/img/thumbnails/unkown-brain-super-hero.webp"
     },
     {
-        singer: "On & On (feat. Daniel Levi) [NCS Release]",
-        band: "Cartoon",
+        name: "On & On (feat. Daniel Levi) [NCS Release]",
+        singer: "Cartoon",
         released: "2015",
+        duration: "03:28",
         file: "./assets/songs/Cartoon-On-On-feat-Daniel-Levi-NCS-Release.ogg",
         cover: "./assets/img/thumbnails/cartoon-on-on.webp"
     },
     {
-        singer: "We Are [NCS Release]",
-        band: "Jo Cohen & Sex Whales",
+        name: "We Are [NCS Release]",
+        singer: "Jo Cohen & Sex Whales",
         released: "2016",
+        duration: "03:57",
         file: "./assets/songs/Jo-Cohen-Sex-Whales-We-Are-NCS-Release.ogg",
         cover: "./assets/img/thumbnails/We-Are-Jo-Cohen.webp"
     },
     {
-        singer: "Cradles [NCS Release]",
-        band: "Sub Urban",
+        name: "Cradles [NCS Release]",
+        singer: "Sub Urban",
         released: "2019",
+        duration: "03:29",
         file: "./assets/songs/Sub-Urban-Cradles-NCS-Release.ogg",
         cover: "./assets/img/thumbnails/Sub-Urban-Cradles.webp"
     },
     {
-        singer: "Heroes Tonight [NCS Release]",
-        band: "Janji feat Johnning",
+        name: "Heroes Tonight [NCS Release]",
+        singer: "Janji feat Johnning",
         released: "2015",
+        duration: "03:28",
         file: "./assets/songs/Janji-Heroes-Tonight-feat-Johnning-NCS-Release.ogg",
         cover: "./assets/img/thumbnails/janji-heroes.webp"
     }
 ]
+
+
 
 // ========== Player functions ========== //
 
@@ -180,8 +193,8 @@ function nextMusic() {
     }
 
     thumbnail.src = playlist[track].cover;
+    musicName.innerHTML = playlist[track].name;
     singer.innerHTML = playlist[track].singer;
-    band.innerHTML = playlist[track].band;
     released.innerHTML = playlist[track].released;
     music.setAttribute('src', playlist[track].file);
 
@@ -201,8 +214,8 @@ function previousMusic() {
     }
 
     thumbnail.src = playlist[track].cover;
+    musicName.innerHTML = playlist[track].name;
     singer.innerHTML = playlist[track].singer;
-    band.innerHTML = playlist[track].band;
     released.innerHTML = playlist[track].released;
     music.setAttribute('src', playlist[track].file);
 
@@ -234,3 +247,11 @@ function convertTimerMusic(time) {
 
     return `${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`;
 }
+
+function toggleModal() {
+    playlistModal.classList.toggle('active');
+}
+
+playlist.forEach(element => {
+    playlistLi.innerHTML += `<li class="song">${element.name} - ${element.singer}<span>${element.duration}</span>`;
+});

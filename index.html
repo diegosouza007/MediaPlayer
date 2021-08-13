@@ -26,20 +26,15 @@
         <div class="display">
             <img id="thumbnail" src="./assets/img/thumbnails/unkown-brain-super-hero.webp" alt="Music Thumbnail">
             <div class="music-info">
-                <p id="singer">Superhero</p>
-                <p id="band">Unknown Brain (feat. Chris Linton)</p>
+                <p id="musicName">Superhero</p>
+                <p id="singer">Unknown Brain (feat. Chris Linton)</p>
                 <p id="released">2016</p><br/><br/><br/>
                 <span id="progress"></span>
                 <audio id="music" src="./assets/songs/Unknown-Brain-Superhero-_feat.-Chris-Linton_-_NCS-Release_.ogg"></audio>
             </div>
         </div>
-        <div class="playlist">
-            <ul>
-                <li>Unknown Brain - Superhero (feat. Chris Linton)<span>3:02</span></li>
-                <li>Janji Heroes Tonight feat Johnning<span>3:28</span></li>
-                <li>Cartoon On On feat Daniel Levi<span>3:28</span></li>
-            </ul>
-        </div>
+        <div id="open__modal" class="button"><button id="playlist-btn">Playlist</button></div>
+        <input id="seekbar" type="range" min="0" max="100" step="1">
         <div class="controls">
             <div class="controls_wrappper">
                 <img id="repeat" src="./assets/img/buttons/repeat.svg" title="Ativar repetição" alt="Ativar repetição">
@@ -51,6 +46,11 @@
                 <img id="volume" src="./assets/img/buttons/volume-2.svg" title="Volume" alt="Volume">
             </div>
         </div>
+    </div>
+    <div class="playlist__modal">
+        <span class="close__modal">X</span>
+        <ul class="playlist">
+        </ul>
     </div>
 </body>
 
