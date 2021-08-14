@@ -1,25 +1,28 @@
 // Getting DOM references from the index page
 
-const openPlaylistBtn = document.getElementById('open__modal');
 const playlistModal = document.querySelector('.playlist__modal');
+const reduceSpeedButton = document.getElementById('reduce-spd');
+const openPlaylistBtn = document.getElementById('playlist-btn');
 const closeModalBtn = document.querySelector('.close__modal');
 const skipForward = document.getElementById('skip-forward');
 const fastForward = document.getElementById('fast-forward');
+const songsControl = document.querySelectorAll('.song');
 const playlistLi = document.querySelector('.playlist');
 const thumbnail = document.getElementById('thumbnail');
+const musicName = document.getElementById('musicName');
 const skipBack = document.getElementById('skip-back');
 const progress = document.getElementById('progress');
 const released = document.getElementById('released');
+const seekBar = document.getElementById('seekbar');
 const repeat = document.getElementById('repeat');
-const rewind = document.getElementById('rewind');
 const volume = document.getElementById('volume');
-const musicName = document.getElementById('musicName');
 const singer = document.getElementById('singer');
 const music = document.getElementById('music');
 const play = document.getElementById('play');
 
 // Adding event listenners for the actions buttons
 
+reduceSpeedButton.addEventListener('click', reduceMusicSpeed);
 fastForward.addEventListener('click', fastForwardMusic);
 openPlaylistBtn.addEventListener('click', toggleModal);
 closeModalBtn.addEventListener('click', toggleModal);
@@ -27,7 +30,6 @@ repeat.addEventListener('click', activeLoopMusic);
 skipBack.addEventListener('click', previousMusic);
 skipForward.addEventListener('click', nextMusic);
 volume.addEventListener('click', changeVolume);
-rewind.addEventListener('click', rewindMusic);
 play.addEventListener('click', playMusic);
 
 
@@ -116,6 +118,9 @@ music.addEventListener("timeupdate", function() {
     let progressTimer = convertTimerMusic(music.currentTime);
 
     progress.innerHTML = `${progressTimer} / ${totalDuration}`;
+
+    seekBar.max = music.duration;
+    seekBar.value = music.currentTime;
 });
 
 // Change to the next music after ends actual music in progress
@@ -126,18 +131,14 @@ music.addEventListener("ended", () => nextMusic());
 
 function playMusic() {
 
-    if (playButton === pauseIconImage) {
-        play.src = playIconImage;
-    } else {
-        play.src = pauseIconImage;
-    }
-
     if (isMusicPlaying) {
         music.pause();
         play.src = playIconImage;
+        play.title = "Reproduzir";
     } else {
         music.play();
         play.src = pauseIconImage;
+        play.title = "Pausar";
     }
 
     isMusicPlaying = !isMusicPlaying;
@@ -149,9 +150,9 @@ function fastForwardMusic() {
     music.playbackRate += 0.25;
 }
 
-// NEED CORRECTION: CHANGE RATE SPEED FOR REWIND FUNCTION
+// Reduce music speed rate
 
-function rewindMusic() {
+function reduceMusicSpeed() {
     music.playbackRate -= 0.25;
 }
 
@@ -163,21 +164,25 @@ function changeVolume() {
             volumeRate = 0.7;
             music.volume = volumeRate;
             volume.setAttribute('src', './assets/img/buttons/volume-1.svg');
+            volume.setAttribute('title', 'Volume em 70%');
             break;
         case 0.7:
             volumeRate = 0.4;
             music.volume = volumeRate;
             volume.setAttribute('src', './assets/img/buttons/volume.svg');
+            volume.setAttribute('title', 'Volume em 40%');
             break;
         case 0.4:
             volumeRate = 0;
             music.volume = volumeRate;
             volume.setAttribute('src', './assets/img/buttons/volume-x.svg');
+            volume.setAttribute('title', 'Volume mutado');
             break;
         default:
             volumeRate = 1.0;
             music.volume = volumeRate;
             volume.setAttribute('src', './assets/img/buttons/volume-2.svg');
+            volume.setAttribute('title', 'Volume em 100%');
             break;
     }
 }
@@ -199,6 +204,7 @@ function nextMusic() {
     music.setAttribute('src', playlist[track].file);
 
     play.src = pauseIconImage;
+    play.title = "Pausar";
 
     music.play();
 }
@@ -219,7 +225,8 @@ function previousMusic() {
     released.innerHTML = playlist[track].released;
     music.setAttribute('src', playlist[track].file);
 
-    play.rc = pauseIconImage;
+    play.src = pauseIconImage;
+    play.title = "Pausar";
 
     music.play();
 }
@@ -241,6 +248,8 @@ function activeLoopMusic() {
     isRepeatEnable = !isRepeatEnable;
 }
 
+// Convert the music seconds to minutes format(e.g. 00:00)
+
 function convertTimerMusic(time) {
     let minutes = Math.floor(time / 60);
     let seconds = Math.floor(time % 60);
@@ -248,9 +257,13 @@ function convertTimerMusic(time) {
     return `${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`;
 }
 
+// Show or close the playlist modal
+
 function toggleModal() {
     playlistModal.classList.toggle('active');
 }
+
+// Load the musics on the playlist modal page
 
 playlist.forEach(element => {
     playlistLi.innerHTML += `<li class="song">${element.name} - ${element.singer}<span>${element.duration}</span>`;

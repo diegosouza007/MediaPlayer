@@ -14,9 +14,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
-    <!-- Unicons -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Page Title -->
     <title>Music Player</title>
 </head>
@@ -33,17 +31,17 @@
                 <audio id="music" src="./assets/songs/Unknown-Brain-Superhero-_feat.-Chris-Linton_-_NCS-Release_.ogg"></audio>
             </div>
         </div>
-        <div id="open__modal" class="button"><button id="playlist-btn">Playlist</button></div>
-        <input id="seekbar" type="range" min="0" max="100" step="1">
+        <div class="button"><button id="playlist-btn">Playlist</button></div>
+        <input id="seekbar" type="range" min="0" max="0" step="1">
         <div class="controls">
             <div class="controls_wrappper">
                 <img id="repeat" src="./assets/img/buttons/repeat.svg" title="Ativar repetição" alt="Ativar repetição">
-                <img id="rewind" src="./assets/img/buttons/rewind.svg" title="Rebobinar" alt="Rebobinar música">
+                <img id="reduce-spd" src="./assets/img/buttons/rewind.svg" title="Desacelerar" alt="Desacelerar música">
                 <img id="skip-back" src="./assets/img/buttons/skip-back.svg" title="Música anterior" alt="Música anterior">
                 <img id="play" src="./assets/img/buttons/play-circle.svg" title="Reproduzir" alt="Reproduzir">
                 <img id="skip-forward" src="./assets/img/buttons/skip-forward.svg" title="Próxima música" alt="Próxima música">
                 <img id="fast-forward" src="./assets/img/buttons/fast-forward.svg" title="Aumentar velocidade" alt="Aumentar velocidade">
-                <img id="volume" src="./assets/img/buttons/volume-2.svg" title="Volume" alt="Volume">
+                <img id="volume" src="./assets/img/buttons/volume-2.svg" title="Volume em 100%" alt="Volume">
             </div>
         </div>
     </div>
