@@ -268,3 +268,9 @@ function toggleModal() {
 playlist.forEach(element => {
     playlistLi.innerHTML += `<li class="song">${element.name} - ${element.singer}<span>${element.duration}</span>`;
 });
+
+// Allows the user change seekbar progress value
+
+seekBar.addEventListener('input', function() {
+    music.currentTime = seekBar.value;
+})

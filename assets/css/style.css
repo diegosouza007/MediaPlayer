@@ -140,16 +140,6 @@ span {
 }
 
 
-/* Seekbar */
-
-#seekbar {
-    max-width: 100rem;
-    width: calc(100% - 7rem);
-    display: flex;
-    margin: auto;
-}
-
-
 /* Control panel */
 
 .controls {
@@ -202,10 +192,20 @@ span {
 }
 
 
+/* Seekbar */
+
+#seekbar {
+    cursor: pointer;
+    max-width: 100rem;
+    width: calc(100% - 7rem);
+    display: flex;
+    margin: auto;
+}
+
+
 /* Input range - Seekbar */
 
 input[type='range'] {
-    cursor: pointer;
     all: unset;
 }
 
