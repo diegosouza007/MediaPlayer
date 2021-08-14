@@ -74,8 +74,8 @@ const playlist = [{
         cover: "./assets/img/thumbnails/unkown-brain-super-hero.webp"
     },
     {
-        name: "On & On (feat. Daniel Levi) [NCS Release]",
-        singer: "Cartoon",
+        name: "On & On [NCS Release]",
+        singer: "Cartoon (feat. Daniel Levi)",
         released: "2015",
         duration: "03:28",
         file: "./assets/songs/Cartoon-On-On-feat-Daniel-Levi-NCS-Release.ogg",

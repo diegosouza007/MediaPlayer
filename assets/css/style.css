@@ -212,6 +212,7 @@ input[type='range'] {
 input[type='range'] {
     background: var(--dark-blue);
     border-radius: 1rem;
+    overflow: hidden;
 }
 
 #seekbar::-webkit-slider-thumb {
@@ -220,4 +221,5 @@ input[type='range'] {
     width: 1.4rem;
     border-radius: 50%;
     background: var(--green);
+    box-shadow: -100rem 0 0 100rem var(--green);
 }
