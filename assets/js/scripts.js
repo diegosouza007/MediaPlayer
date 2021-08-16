@@ -6,7 +6,6 @@ const openPlaylistBtn = document.getElementById('playlist-btn');
 const closeModalBtn = document.querySelector('.close__modal');
 const skipForward = document.getElementById('skip-forward');
 const fastForward = document.getElementById('fast-forward');
-const songsControl = document.querySelectorAll('.song');
 const playlistLi = document.querySelector('.playlist');
 const thumbnail = document.getElementById('thumbnail');
 const musicName = document.getElementById('musicName');
@@ -142,6 +141,7 @@ function playMusic() {
     }
 
     isMusicPlaying = !isMusicPlaying;
+
 }
 
 // Accelerate music speed rate
@@ -263,14 +263,38 @@ function toggleModal() {
     playlistModal.classList.toggle('active');
 }
 
-// Load the musics on the playlist modal page
-
-playlist.forEach(element => {
-    playlistLi.innerHTML += `<li class="song">${element.name} - ${element.singer}<span>${element.duration}</span>`;
-});
-
 // Allows the user change seekbar progress value
 
 seekBar.addEventListener('input', function() {
     music.currentTime = seekBar.value;
 })
+
+// Insert all musics on the playlist modal page
+
+playlist.forEach(element => {
+    playlistLi.innerHTML += `<li class="tracks" id="${playlist.indexOf(element)}">${element.name} - ${element.singer}<span>${element.duration}</span>`;
+});
+
+
+// Allows the user click in a desired music on the playlist and it will be played
+
+const tracks = Array.from(document.querySelectorAll('.tracks'));
+
+tracks.forEach(index => {
+    index.addEventListener("click", function(e) {
+
+        let musicSelected = index.getAttribute("id");
+        track = musicSelected;
+
+        thumbnail.src = playlist[track].cover;
+        musicName.innerHTML = playlist[track].name;
+        singer.innerHTML = playlist[track].singer;
+        released.innerHTML = playlist[track].released;
+        music.setAttribute('src', playlist[track].file);
+
+        play.src = pauseIconImage;
+        play.title = "Pausar";
+
+        music.play();
+    });
+});
