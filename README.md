@@ -16,4 +16,4 @@ Projeto utilizando a interface <a href="https://developer.mozilla.org/en-US/docs
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/11907759/130339626-d2c8fca7-c8a9-44e2-accd-41c8ebd053ac.gif)
 
-Live Demo: <a href="https://diegosouza007.github.io/MusicPlayer">https://diegosouza007.github.io/MusicPlayer</a>
+Live Demo: <a href="https://diegosouza007.github.io/MediaPlayer">https://diegosouza007.github.io/MediaPlayer</a>
