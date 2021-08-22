@@ -1,4 +1,4 @@
-# MusicPlayer
+# MediaPlayer
 
 Projeto utilizando a interface <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">HTMLMediaElement<a/> e a linguagem de programação JavaScript para manipular músicas em um protótipo de player de áudio.
 
