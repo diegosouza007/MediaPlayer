@@ -142,6 +142,7 @@ function playMusic() {
 
     isMusicPlaying = !isMusicPlaying;
 
+    highlightMusicPlaying();
 }
 
 // Accelerate music speed rate
@@ -207,6 +208,8 @@ function nextMusic() {
     play.title = "Pausar";
 
     music.play();
+
+    highlightMusicPlaying();
 }
 
 // Return to the previously music
@@ -229,6 +232,8 @@ function previousMusic() {
     play.title = "Pausar";
 
     music.play();
+
+    highlightMusicPlaying();
 }
 
 // Enable/Disable loop music
@@ -292,11 +297,7 @@ tracks.forEach((element) => {
         released.innerHTML = playlist[track].released;
         music.setAttribute('src', playlist[track].file);
 
-        document.querySelectorAll('.tracks').forEach((e) => {
-            e.classList.remove('highlight-music');
-        });
-
-        this.classList.add('highlight-music');
+        highlightMusicPlaying();
 
         play.src = pauseIconImage;
         play.title = "Pausar";
@@ -305,9 +306,7 @@ tracks.forEach((element) => {
     });
 });
 
-// Change highlight automaticaly when the music change
-
-music.addEventListener("ended", () => {
+function highlightMusicPlaying() {
 
     document.querySelectorAll('.tracks').forEach((e) => {
         e.classList.remove('highlight-music');
@@ -318,4 +317,4 @@ music.addEventListener("ended", () => {
             e.classList.add('highlight-music');
         }
     });
-});
+}
