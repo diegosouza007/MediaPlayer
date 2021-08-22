@@ -32,7 +32,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: min(60rem, 80%);
+    width: min(60rem, 90%);
     height: calc(100% - 31.2rem);
     margin: auto;
 }
@@ -122,11 +122,10 @@ span {
     border-radius: 1.5rem 0;
 }
 
-
-/* .playlist__modal li:nth-child(0) {
-    background: var(--dark-blue);
+.highlight-music {
+    background-color: var(--dark-blue);
     border-radius: 1.5rem 0;
-} */
+}
 
 .close__modal {
     cursor: pointer;
@@ -231,18 +230,14 @@ input[type='range'] {
     box-shadow: -100rem 0 0 100rem var(--green);
 }
 
-@media screen and (max-width: 670px) {
-    .display {
-        flex-direction: column;
-    }
+@media screen and (max-width: 592px) {
     .display img {
-        display: inline-block;
+        display: block;
         text-align: center;
         height: 19rem;
         width: 19rem;
         margin: 2.5rem 2rem;
     }
-    #progress {}
     .background .display .music-info {
         display: block;
         text-align: center;

@@ -164,13 +164,13 @@ function changeVolume() {
             volumeRate = 0.7;
             music.volume = volumeRate;
             volume.setAttribute('src', './assets/img/buttons/volume-1.svg');
-            volume.setAttribute('title', 'Volume em 70%');
+            volume.setAttribute('title', 'Volume: 70%');
             break;
         case 0.7:
             volumeRate = 0.4;
             music.volume = volumeRate;
             volume.setAttribute('src', './assets/img/buttons/volume.svg');
-            volume.setAttribute('title', 'Volume em 40%');
+            volume.setAttribute('title', 'Volume: 40%');
             break;
         case 0.4:
             volumeRate = 0;
@@ -182,7 +182,7 @@ function changeVolume() {
             volumeRate = 1.0;
             music.volume = volumeRate;
             volume.setAttribute('src', './assets/img/buttons/volume-2.svg');
-            volume.setAttribute('title', 'Volume em 100%');
+            volume.setAttribute('title', 'Volume: 100%');
             break;
     }
 }
@@ -280,10 +280,10 @@ playlist.forEach(element => {
 
 const tracks = Array.from(document.querySelectorAll('.tracks'));
 
-tracks.forEach(index => {
-    index.addEventListener("click", function(e) {
+tracks.forEach((element) => {
+    element.addEventListener("click", function() {
 
-        let musicSelected = index.getAttribute("id");
+        let musicSelected = element.getAttribute('id');
         track = musicSelected;
 
         thumbnail.src = playlist[track].cover;
@@ -292,9 +292,30 @@ tracks.forEach(index => {
         released.innerHTML = playlist[track].released;
         music.setAttribute('src', playlist[track].file);
 
+        document.querySelectorAll('.tracks').forEach((e) => {
+            e.classList.remove('highlight-music');
+        });
+
+        this.classList.add('highlight-music');
+
         play.src = pauseIconImage;
         play.title = "Pausar";
 
         music.play();
+    });
+});
+
+// Change highlight automaticaly when the music change
+
+music.addEventListener("ended", () => {
+
+    document.querySelectorAll('.tracks').forEach((e) => {
+        e.classList.remove('highlight-music');
+    });
+
+    tracks.forEach((e) => {
+        if (e.getAttribute('id') == track) {
+            e.classList.add('highlight-music');
+        }
     });
 });
